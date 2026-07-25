@@ -97,4 +97,4 @@ Open your browser and navigate to `http://localhost:3000`.
 
 ## ⚠️ Disclaimer
 This application is a **simulation/demonstration tool** created for educational purposes. 
-**Never enter your real credit card information into untrusted applications.** All data processed in this application is handled locally or via the configured MongoDB instance.
+**Never enter your real credit card information into untrusted applications.** All data processed in this application is handled locally or via the configured MongoDB instance. 
