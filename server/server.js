@@ -73,19 +73,20 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/creditcard-checker';
 
+// Start the server immediately so health checks pass
+server.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📋 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`⚡ Socket.io enabled on port ${PORT}`);
+});
+
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('✅ Connected to MongoDB');
-    // Use server.listen instead of app.listen for socket.io
-    server.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
-      console.log(`📋 Health check: http://localhost:${PORT}/api/health`);
-      console.log(`⚡ Socket.io enabled on port ${PORT}`);
-    });
   })
   .catch((err) => {
     console.error('❌ MongoDB connection error:', err.message);
-    process.exit(1);
+    console.error('⚠️ Server is running, but database connection failed. Please check your MONGO_URI and IP whitelist in Atlas.');
   });
 
 module.exports = { app, server };
